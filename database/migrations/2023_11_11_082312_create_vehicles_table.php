@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('totalPassenger');
             $table->string('manufacture');
             $table->integer('price');
+            $table->string('imagePath');
             $table->timestamps();
         });
     }

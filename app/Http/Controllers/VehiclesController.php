@@ -34,12 +34,30 @@ class VehiclesController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
+        ]);
+
+    
+
+        $imageName = time().'.'.$request->image->extension();  
+
+     
+
+        $request->image->storeAs('public/images', $imageName);
+
+  
+
+        /* Store $imageName name in DATABASE from HERE */
         $vehicle = new Vehicles;
         $vehicle->model = $request->name;
         $vehicle->year = $request->year;
         $vehicle->totalPassenger = $request->totalPassenger;
         $vehicle->manufacture = $request->manufacture;
         $vehicle->price = $request->price;
+        $vehicle->imagePath = $imageName;
 
         if ($request->typeButton == "Car") {
             $request->validate([
@@ -154,7 +172,7 @@ class VehiclesController extends Controller
                 );
         }
 
-        return redirect()->route('vehicle.index')->with('success', 'Customer has been updated successfully.');
+        return redirect()->route('vehicle.index')->with('success', 'Vehicles has been updated successfully.');
     }
 
     /**
@@ -163,6 +181,6 @@ class VehiclesController extends Controller
     public function destroy(Vehicles $vehicle)
     {
         $vehicle->delete();
-        return redirect()->route('vehicle.index')->with('success', 'Customer has been deleted successfully');
+        return redirect()->route('vehicle.index')->with('success', 'Vehicles has been deleted successfully');
     }
 }

@@ -35,22 +35,32 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             <div class="bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
+                @if ($message = Session::get('success'))
+                    <div class="p-4 mb-4 text-sm rounded-lg  bg-green-600 text-white" role="alert">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>{{ $message }}</strong>
+                    </div>
+                @endif
+
+                @if (count($errors) > 0)
+                    <div class="p-4 mb-4 text-sm rounded-lg  bg-green-600 text-white" role="alert">
+                        <strong>Whoops!</strong> There were some problems with your input.
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="flex justify-between py-4">
                     <div class="text-4xl font-semibold">All Order</div>
 
 
-                    <!-- Modal toggle -->
-                    <a class="flex text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-1.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800" 
-                                            href="{{ route('order.create') }}">
-                                                <span class="">
-                                                    Add New Order
-                                                </span>
-                                            </a>
-                    <button data-modal-target="crud-modal" data-modal-toggle="crud-modal"
+                    <a href="{{ route('order.create') }}"><button 
                         class="block text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
                         type="button">
                         Add New Order
-                    </button>
+                    </button></a>
                 </div>
                 <div class="overflow-x-auto shadow-md sm:rounded-lg border border-gray-600">
                     <table class="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400">

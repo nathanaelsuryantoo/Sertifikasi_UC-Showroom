@@ -35,6 +35,23 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             <div class="bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
+                @if ($message = Session::get('success'))
+                    <div class="p-4 mb-4 text-sm rounded-lg  bg-green-600 text-white" role="alert">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>{{ $message }}</strong>
+                    </div>
+                @endif
+
+                @if (count($errors) > 0)
+                    <div class="p-4 mb-4 text-sm rounded-lg  bg-green-600 text-white" role="alert">
+                        <strong>Whoops!</strong> There were some problems with your input.
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="flex justify-between py-4">
                     <div class="text-4xl font-semibold">All Customer</div>
 

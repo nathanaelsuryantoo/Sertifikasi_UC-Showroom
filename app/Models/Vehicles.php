@@ -15,6 +15,7 @@ class Vehicles extends Model
         'totalPassenger',
         'manufacture',
         'price',
+        'imagePath',
     ];
 
     protected $tables = 'vehicles';
