@@ -181,6 +181,7 @@ class VehiclesController extends Controller
     public function destroy(Vehicles $vehicle)
     {
         $vehicle->delete();
+        
         return redirect()->route('vehicle.index')->with('success', 'Vehicles has been deleted successfully');
     }
 }

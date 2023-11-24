@@ -113,6 +113,7 @@ class OrdersController extends Controller
      */
     public function destroy(Orders $order)
     {
-        //
+        $order->delete();
+        return redirect()->route('order.index')->with('success', 'Order has been deleted successfully');
     }
 }
